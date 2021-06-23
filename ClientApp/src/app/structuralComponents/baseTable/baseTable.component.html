@@ -1,0 +1,100 @@
+<p-table [value]="items" [scrollable]="true" *ngIf="!waiting">
+  <ng-template pTemplate="header">
+    <tr>
+      <th></th>
+      <!--ITEM NOME-->
+      <th class="nomeCol">Nome</th>
+
+      <!--ITEM QUANTITà-->
+      <th class="qntCol">Quantità</th>
+
+      <!--ITEM OFFERTA-->
+      <th class="offertaCol" *ngIf="page==Page.Lista">Offerta</th>
+
+      <!--ITEM PREZZO-->
+      <th class="offertaCol">Prezzo</th>
+
+      <!--ITEM ZONA PER LISTA EFFETTIVA-->
+      <th class="offertaCol" *ngIf="page==Page.Lista">
+        <span style="line-height:30px">Zona</span>
+        <button class="orderButton" (click)="changeOrder()">
+          <span *ngIf="this.sortCase==2">Aldi</span>
+          <span *ngIf="this.sortCase==1">Lidl</span>
+        </button>
+      </th>
+
+      <!--ITEM ZONA PER LISTA AUTOCOMPLETE E LISTA BASE LIDL-->
+      <th class="offertaCol" *ngIf="page!=Page.Lista">ZonaLidl</th>
+
+      <!--ITEM ZONA PER LISTA AUTOCOMPLETE E LISTA BASE ALDI-->
+      <th class="offertaCol" *ngIf="page!=Page.Lista">ZonaAldi</th>
+
+      <!--MODIFICA BUTTON-->
+      <th class="offertaCol" style="width:85px">Modifica</th>
+
+      <!--ELIMINA BUTTON-->
+      <th class="offertaCol" style="width:85px">Elimina</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+    <tr [ngStyle]="{'opacity':item.ordine==0?0.25:1}">
+
+      <td></td>
+      <!--ITEM NOME-->
+      <td class="nomeCol">
+        {{item.nome}}
+      </td>
+
+      <!--ITEM QUANTITà-->
+      <td class="qntCol">
+        {{item.quantita}}
+      </td>
+
+      <!--ITEM OFFERTA LIDL-->
+      <td style="text-align: center" *ngIf="sortCase==2&&page==Page.Lista" class="offertaCol">
+        <i class="fas fa-circle" [ngStyle]="{'color':item.offertaLidl?'green':'white'}" style="font-size:20px;"></i>
+      </td>
+
+      <!--ITEM OFFERTA ALDI-->
+      <td style="text-align: center" *ngIf="sortCase==1&&page==Page.Lista" class="offertaCol">
+        <i class="fas fa-circle" [ngStyle]="{'color':item.offertaAldi?'green':'white'}" style="font-size:20px;"></i>
+      </td>
+
+      <!--ITEM PREZZO-->
+      <td class="offertaCol">
+        {{item.prezzo}}
+      </td>
+
+      <!--ITEM ZONA PER LISTA EFFETTIVA-->
+      <td *ngIf="page==Page.Lista" class="offertaCol">
+        {{item.ordine}}
+      </td>
+
+      <!--ITEM ZONA PER LISTA AUTOCOMPLETE E LISTA BASE LIDL-->
+      <td *ngIf="page!=Page.Lista" class="offertaCol">
+        {{item.ordineLidl}}
+      </td>
+
+      <!--ITEM ZONA PER LISTA AUTOCOMPLETE E LISTA BASE ALDI-->
+      <td *ngIf="page!=Page.Lista" class="offertaCol">
+        {{item.ordineAldi}}
+      </td>
+
+      <td style="text-align:center;width:85px" class="offertaCol">
+        <button style="border:none;background-color:inherit" (click)="changeItem(item.id)">
+          <i class="fas fa-edit"></i>
+        </button>
+      </td>
+
+      <td style="text-align:center;width:85px" class="offertaCol">
+        <button style="border:none;background-color:inherit" (click)="deleteItem(item.id)">
+          <i class="far fa-trash-alt"></i>
+        </button>
+      </td>
+
+    </tr>
+  </ng-template>
+</p-table>
+<div *ngIf="waiting">
+  <p-progressSpinner></p-progressSpinner>
+</div>

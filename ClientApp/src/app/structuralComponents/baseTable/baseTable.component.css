@@ -1,0 +1,30 @@
+@media only screen and (min-width:600px) {
+
+}
+
+.orderButton {
+  border: none;
+  background-color: #ff6600;
+  outline: none;
+  float: right;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+.orderButton:hover {
+    background-color:#0050b3;
+}
+
+@media only screen and (max-width: 600px) {
+  .nomeCol {
+    width: 45vw !important;
+  }
+
+  .qntCol {
+    width: 30vw !important;
+  }
+
+  .offertaCol {
+    width: 20vw !important;
+  }
+}

@@ -1,0 +1,163 @@
+
+  <div style="margin:20px 0;">
+    <button class="addButton" (click)="openItemDialog()"><i class="fas fa-plus"></i></button>
+    <button *ngIf="page==''" class="importButton" (click)="displayImportDialog=true">Importa lista base</button>
+  </div>
+  <p-table [value]="items" [scrollable]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="nomeCol">Nome</th>
+        <th class="qntCol">Quantità</th>
+        <th class="offertaCol" *ngIf="page==''">Offerta</th>
+        <th class="offertaCol">Prezzo</th>
+        <th class="offertaCol" *ngIf="page==''">
+          <span style="line-height:30px">Zona</span>
+          <button style="border:none;background-color:#ff6600;outline:none;float:right;color:white;border-radius:5px;padding:5px 10px;" (click)="changeOrder()">
+            <span *ngIf="this.sortCase==2">Aldi</span>
+            <span *ngIf="this.sortCase==1">Lidl</span>
+          </button>
+        </th>
+        <th class="offertaCol" *ngIf="page=='Autocomplete'||page=='Basic'">ZonaLidl</th>
+        <th class="offertaCol" *ngIf="page=='Autocomplete'||page=='Basic'">ZonaAldi</th>
+        <th class="offertaCol" style="width:85px">Modifica</th>
+        <th class="offertaCol" style="width:85px">Elimina</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr [ngStyle]="{'opacity':item.ordine==0?0.25:1}">
+        <td class="nomeCol">
+          {{item.nome}}
+        </td>
+        <td class="qntCol">
+          {{item.quantita}}
+        </td>
+        <td style="text-align: center" *ngIf="sortCase==1&&page==''" class="offertaCol">
+          <i class="fas fa-circle" [ngStyle]="{'color':item.offertaAldi?'green':'white'}" style="font-size:20px;"></i>
+        </td>
+        <td style="text-align: center" *ngIf="sortCase==2&&page==''" class="offertaCol">
+          <i class="fas fa-circle" [ngStyle]="{'color':item.offertaLidl?'green':'white'}" style="font-size:20px;"></i>
+        </td>
+        <td class="offertaCol">
+          {{item.prezzo}}
+        </td>
+        <td *ngIf="page==''" class="offertaCol">
+          {{item.ordine}}
+        </td>
+        <td *ngIf="page=='Autocomplete'||page=='Basic'" class="offertaCol">
+          {{item.ordineLidl}}
+        </td>
+        <td *ngIf="page=='Autocomplete'||page=='Basic'" class="offertaCol">
+          {{item.ordineAldi}}
+        </td>
+        <td style="text-align:center;width:85px" class="offertaCol">
+          <button style="border:none;background-color:inherit" (click)="openItemDialog(item)">
+            <i class="fas fa-edit"></i>
+          </button>
+        </td>
+        <td style="text-align:center;width:85px" class="offertaCol">
+          <button style="border:none;background-color:inherit" (click)="openDeleteDialog(item)">
+            <i class="far fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+
+<p-dialog [(visible)]="displayItemDialog" styleClass="AdaptivePDialog" [showHeader]="false">
+  <div>
+    <div style="display:inline-block;width:80%">
+      <span *ngIf="new" class="dialogTitle">Nuovo oggetto</span>
+      <span *ngIf="new==false" class="dialogTitle">Modifica oggetto</span>
+    </div>
+    <button class="addButton" style="float:right;display:inline-block" (click)="displayItemDialog=false;sendRequestError=false;"><i class="fas fa-times"></i></button>
+  </div>
+
+  <div>
+
+    <div class="ui-float-label">
+      <p-autoComplete [(ngModel)]="autocompleteItem" field="nome" [suggestions]="suggestedItems" (keyup)="searchForItems()" (onSelect)="selectTheItem($event)"></p-autoComplete>
+      <label for="nome">Nome</label>
+    </div>
+
+    <div class="ui-float-label">
+      <input [(ngModel)]="currentItem.quantita" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
+      <label for="nome">Quantità</label>
+    </div>
+
+    <div class="ui-float-label">
+      <input [(ngModel)]="currentItem.prezzo" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
+      <label for="nome">Prezzo</label>
+    </div>
+
+    <div class="ui-float-label">
+      <input [(ngModel)]="currentItem.ordineLidl" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
+      <label for="nome">Ordine Lidl</label>
+    </div>
+
+    <div class="ui-float-label">
+      <input [(ngModel)]="currentItem.ordineAldi" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
+      <label for="nome">Ordine Aldi</label>
+    </div>
+    <div style="margin:10px auto; width:100%">
+      <button class="offertaButton" style="margin-right:5%;" [ngClass]="{'offertaButtonTrue':currentItem.offertaAldi,'offertaButtonFalse':currentItem.offertaAldi==false}" (click)="currentItem.offertaAldi?currentItem.offertaAldi=false:currentItem.offertaAldi=true;">
+        Offerta Aldi
+      </button>
+      <button class="offertaButton" style="margin-left:5%;" [ngClass]="{'offertaButtonTrue':currentItem.offertaLidl,'offertaButtonFalse':currentItem.offertaLidl==false}" (click)="currentItem.offertaLidl?currentItem.offertaLidl=false:currentItem.offertaLidl=true;">
+        Offerta Lidl
+      </button>
+    </div>
+    <span *ngIf="sendRequestError">C'è stato un problema</span>
+
+    <div style="margin:20px auto; width:40px" *ngIf="new">
+      <button class="addButton" (click)="addItem()">
+        <i class="fas fa-save"></i>
+      </button>
+    </div>
+
+    <div style="margin:20px auto; width:40px" *ngIf="new==false">
+      <button class="addButton" (click)="EditItem()">
+        <i class="fas fa-edit"></i>
+      </button>
+    </div>
+  </div>
+  
+</p-dialog>
+<p-dialog [(visible)]="displayDeleteDialog" [showHeader]="false" styleClass="delete">
+  <div>
+    <div style="display:inline-block;width:80%">
+      <span *ngIf="currentItem.id==0||currentItem.id==null" class="dialogTitle">Nuovo oggetto</span>
+      <span *ngIf="currentItem.id!=0&&currentItem.id!=null" class="dialogTitle">Modifica oggetto</span>
+    </div>
+    <button class="addButton" style="float:right;display:inline-block" (click)="displayDeleteDialog=false;sendRequestError=false;"><i class="fas fa-times"></i></button>
+  </div>
+  <div style="width:90%;margin:40px auto;font-size:18px;">
+    Vuoi davvero eliminare l'oggetto {{this.currentItem.nome}}?
+  </div>
+  <span *ngIf="sendRequestError">C'è stato un problema</span>
+  <div style="margin:20px auto 0 auto; width:40px">
+    <button class="addButton" (click)="DeleteItem()">
+      <i class="far fa-trash-alt"></i>
+    </button>
+  </div>
+
+</p-dialog>
+
+<p-dialog [(visible)]="displayImportDialog" [showHeader]="false" styleClass="delete">
+  <div>
+    <div style="display:inline-block;width:80%">
+      <span class="dialogTitle">Importa lista base</span>
+    </div>
+    <button class="addButton" style="float:right;display:inline-block" (click)="displayImportDialog=false;sendRequestError=false;"><i class="fas fa-times"></i></button>
+  </div>
+  <div style="width:90%;margin:30px auto;font-size:18px;">
+    Vuoi davvero importare la lista base? Gli oggetti con lo stesso nome non verranno importati.
+  </div>
+  <span *ngIf="sendRequestError">C'è stato un problema</span>
+  <div style="margin:20px auto 0 auto; width:40px">
+    <button class="addButton" (click)="importBasicList()">
+      <i class="fas fa-file-import"></i>
+    </button>
+  </div>
+
+</p-dialog>

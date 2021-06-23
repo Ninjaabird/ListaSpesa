@@ -1,0 +1,15 @@
+.title {
+  margin: 10px;
+  text-align: center
+}
+.ui-float-label {
+  margin: 30px auto 10px auto;
+  display: block;
+}
+.logContainer {
+    border-radius:5px;
+    border:1px solid #ccc;
+    padding:20px 40px;
+    width:40%;
+    margin:20px auto;
+}

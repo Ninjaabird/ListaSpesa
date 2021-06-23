@@ -1,0 +1,149 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+
+
+@import 'C:\Users\ninja\source\repos\ListSpesa\ClientApp\node_modules\primeng\resources/primeng.css';
+@import 'C:\Users\ninja\source\repos\ListSpesa\ClientApp\node_modules\primeng\resources\themes\nova-light\theme.css';
+@import 'C:\Users\ninja\source\repos\ListSpesa\ClientApp\node_modules\primeicons\primeicons.css';
+@import 'C:\Users\ninja\source\repos\ListSpesa\ClientApp\node_modules\primeng\resources\components\button\button.css';
+
+
+
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.ui-float-label {
+  margin: 5px;
+  margin-bottom: -20px;
+  display: inline-block;
+}
+@media only screen and (min-width: 600px) {
+  .ui-dropdown {
+    position: relative;
+    top: -22px;
+  }
+  .ui-dialog.delete {
+    width: 50% !important;
+    height: 30% !important;
+    border: none !important;
+    border-radius: 10px !important;
+  }
+
+    .ui-dialog.delete .ui-dialog-content {
+      width: 100% !important;
+      height: 100% !important;
+      border: 3px solid #1C6E7D !important;
+      border-radius: 10px !important;
+    }
+}
+@media only screen and (max-width: 600px) {
+  .ui-dropdown {
+    position: relative;
+    top: 3px;
+    margin-left:5px;
+  }
+  .styleFont {
+      font-size:14px;
+  }
+  body {
+    margin: 0 !important;
+  }
+  .container {
+    margin: 0 !important;
+  }
+  .colmodifier1 {
+    width: 150px;
+  }
+  .colmodifier2 {
+      width:70px;
+  }
+  .ui-dialog.AdaptivePDialog {
+    width: 90% !important;
+    height: 80% !important;
+  }
+  .ui-dialog.delete {
+    width: 95% !important;
+    height: 40% !important;
+    border: none !important;
+    border-radius: 10px !important;
+  }
+
+    .ui-dialog.delete .ui-dialog-content {
+      width: 100% !important;
+      height: 100% !important;
+      border: 3px solid #1C6E7D !important;
+      border-radius: 10px !important;
+    }
+}
+
+.ui-button {
+  margin: 10px !important;
+}
+  .btn btn-success {
+    margin: auto;
+  }
+
+  .deleteItem {
+    height: 100% !important;
+    width: 100% !important;
+    border: none;
+    background-color: inherit;
+  }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+.ui-dialog {
+  width: 50% !important;
+  height: 80% !important;
+  border: none !important;
+  border-radius: 10px !important;
+}
+  .ui-dialog .ui-dialog-content {
+    width: 100% !important;
+    height: 100% !important;
+    border: 3px solid #1C6E7D !important;
+    border-radius: 10px !important;
+  }
+
+  .ui-inputtext {
+      border-width:2px !important;
+      border-radius:4px !important;
+  }
+    .ui-inputtext:hover {
+      transition:0.5s !important;
+      border-color: #ff6600 !important;
+    }
+    .ui-inputtext:focus {
+      border-color: #1C6E7D !important;
+      transition: 0.5s !important;
+    }
+.ui-autocomplete {
+    width:100% !important;
+}
+  .ui-autocomplete .ui-inputtext {
+    width: 100% !important;
+  }
+.ui-button.logButton {
+    width:100% !important; 
+}

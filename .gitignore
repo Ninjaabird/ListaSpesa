@@ -1,0 +1,6 @@
+.vs/*
+.bin/*
+obj/*
+**/bin
+**/e2e
+wwwroot/favicon.ico

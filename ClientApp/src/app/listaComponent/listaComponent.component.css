@@ -1,0 +1,70 @@
+.addButton {
+  width: 45px;
+  height: 45px;
+  border: none;
+  background-color: #1C6E7D;
+  color: white;
+  font-size:25px;
+  border-radius:50%;
+  outline:none;
+}
+  .addButton:hover {
+    transition: 0.25s;
+    background-color: #ff6600;
+  }
+.importButton {
+  padding:5px 10px;
+  border: none;
+  background-color: #1C6E7D;
+  color: white;
+  font-size: 15px;
+  border-radius: 5px;
+  outline: none;
+  float:right;
+}
+
+  .importButton:hover {
+    transition: 0.25s;
+    background-color: #ff6600;
+  }
+  .dialogTitle {
+      font-size:25px;
+  }
+.ui-float-label {
+    display:block;
+    margin:35px auto;
+    width:80%;
+}
+.offertaButtonTrue {
+  outline:none;
+  width:40%;
+  border: 2px solid darkgreen;
+  padding: 5px 10px;
+  color: white;
+  background-color: darkgreen;
+  border-radius: 5px;
+  font-size:16px;
+  font-weight:500;
+}
+.offertaButtonFalse {
+  outline: none;
+  width: 40%;
+  border: 2px solid #161616;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: black;
+  background-color: white;
+  font-size: 16px;
+  font-weight: 500;
+}
+@media only screen and (max-width: 600px) {
+  .nomeCol {
+    width:45vw !important;
+  }
+  .qntCol {
+      width:30vw !important;
+  }
+  .offertaCol {
+      width:20vw !important;
+  }
+}
