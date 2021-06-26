@@ -2,48 +2,69 @@ import { Component, Input, OnInit } from "@angular/core";
 import { Item, Page, Utils } from "../utils/utils";
 import { HttpClient } from "@angular/common/http";
 import { Request } from "../utils/request";
+import { Storage } from "../utils/Storage";
 
 @Component({
   selector: 'app-lista-component-base',
   templateUrl: './listaComponent.component.html',
   styleUrls:['./listaComponent.component.css']
 })
-export class ListaComponentComponent implements OnInit{
+export class ListaComponentComponent {
+  Page = Page;
+
   @Input() page: Page;
 
-  displayNewItemDialog: boolean = false;
-
-  displayChangeItemDialog: boolean = false;
+  displayItemDialog: boolean = false;
 
   displayDeleteDialog: boolean = false;
 
   displayImportDialog: boolean = false;
 
-  deleteItemsId: number[];
+  displayTransferDialog: boolean = false;
+
+  deleteItemsId: number[]=[];
+
+  singleItemId: number;
+
+  changeItemId: number;
 
   constructor(private http: HttpClient) {
 
   }
-
   
   openAddItemDialog() {
-    this.displayNewItemDialog = true;
+    this.changeItemId = 0;
+    this.displayItemDialog = !this.displayItemDialog;
   }
 
   openImportDialog() {
     this.displayImportDialog = true;
   }
 
+  openDeleteSelectedItems() {
+    this.displayDeleteDialog = true;
+  }
+
+  openTransferDialog() {
+    this.displayTransferDialog = true;
+  }
+
+  onCloseAddDialog() {
+    this.displayItemDialog = false;
+  }
+
   //callback relativi alla baseTable
   openChangeItemDialog(id: number) {
-    this.displayChangeItemDialog = true;
+    this.displayItemDialog = true;
+    this.changeItemId = id;
   }
 
   selectItemCallback(items: number[]) {
     this.deleteItemsId = items;
   }
 
-  openDeleteDialog(listId: number) {
+  openDeleteDialog(id: number) {
     this.displayDeleteDialog = true;
+    this.singleItemId = id;
   }
 }

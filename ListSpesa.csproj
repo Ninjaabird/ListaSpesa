@@ -34,11 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\structuralComponents\deleteDialog\" />
-    <Folder Include="ClientApp\src\app\structuralComponents\importDialog\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\structuralComponents\addOrChangeDialog\addOrChangeDialog.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\structuralComponents\baseTable\baseTable.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\utils\Storage.ts" />

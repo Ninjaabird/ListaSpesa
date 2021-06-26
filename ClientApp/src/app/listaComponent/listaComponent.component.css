@@ -7,6 +7,7 @@
   font-size:25px;
   border-radius:50%;
   outline:none;
+  margin:10px;
 }
   .addButton:hover {
     transition: 0.25s;
@@ -27,36 +28,6 @@
     transition: 0.25s;
     background-color: #ff6600;
   }
-  .dialogTitle {
-      font-size:25px;
-  }
-.ui-float-label {
-    display:block;
-    margin:35px auto;
-    width:80%;
-}
-.offertaButtonTrue {
-  outline:none;
-  width:40%;
-  border: 2px solid darkgreen;
-  padding: 5px 10px;
-  color: white;
-  background-color: darkgreen;
-  border-radius: 5px;
-  font-size:16px;
-  font-weight:500;
-}
-.offertaButtonFalse {
-  outline: none;
-  width: 40%;
-  border: 2px solid #161616;
-  border-radius: 5px;
-  padding: 5px 10px;
-  color: black;
-  background-color: white;
-  font-size: 16px;
-  font-weight: 500;
-}
 @media only screen and (max-width: 600px) {
   .nomeCol {
     width:45vw !important;

@@ -8,11 +8,47 @@
 @import 'C:\Users\ninja\source\repos\ListSpesa\ClientApp\node_modules\primeicons\primeicons.css';
 @import 'C:\Users\ninja\source\repos\ListSpesa\ClientApp\node_modules\primeng\resources\components\button\button.css';
 
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1C6E7D;
+}
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff6600;
+  }
 
 
 a {
   color: #0366d6;
 }
+
+.addButton {
+  width: 45px;
+  height: 45px;
+  border: none;
+  background-color: #1C6E7D;
+  color: white;
+  font-size: 25px;
+  border-radius: 50%;
+  outline: none;
+  margin: 10px;
+}
+
+  .addButton:hover {
+    transition: 0.25s;
+    background-color: #ff6600;
+  }
 
 code {
   color: #e01a76;
@@ -36,9 +72,10 @@ code {
   }
   .ui-dialog.delete {
     width: 50% !important;
-    height: 30% !important;
+    height: auto !important;
     border: none !important;
     border-radius: 10px !important;
+    overflow:auto !important;
   }
 
     .ui-dialog.delete .ui-dialog-content {
@@ -46,6 +83,7 @@ code {
       height: 100% !important;
       border: 3px solid #1C6E7D !important;
       border-radius: 10px !important;
+      overflow: auto !important;
     }
 }
 @media only screen and (max-width: 600px) {
@@ -73,18 +111,24 @@ code {
     width: 90% !important;
     height: 80% !important;
   }
+  .dialogTitle {
+    font-size: 25px;
+  }
   .ui-dialog.delete {
     width: 95% !important;
     height: 40% !important;
     border: none !important;
     border-radius: 10px !important;
+    overflow: auto !important;
   }
 
     .ui-dialog.delete .ui-dialog-content {
       width: 100% !important;
       height: 100% !important;
+      overflow: auto !important;
       border: 3px solid #1C6E7D !important;
       border-radius: 10px !important;
+      overflow: auto !important;
     }
 }
 

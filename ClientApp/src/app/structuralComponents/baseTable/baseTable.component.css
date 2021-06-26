@@ -11,8 +11,26 @@
   border-radius: 5px;
   padding: 5px 10px;
 }
-.orderButton:hover {
-    background-color:#0050b3;
+  .orderButton:hover {
+    background-color: #1C6E7D;
+  }
+.checkBoxCustom {
+  overflow: visible;
+  margin: 0 auto;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: 0.2s;
+}
+  .checkBoxCustom.checkBoxCustomSelected {
+    background-color: #1C6E7D;
+    box-shadow: 2px 2px 5px #1C6E7D;
+    border: none;
+  }
+.checkBoxCustom .customIcon {
+    color:white;
+    font-size:25px;
 }
 
 @media only screen and (max-width: 600px) {

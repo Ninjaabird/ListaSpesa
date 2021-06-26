@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Page } from '../utils/utils';
 
 
 @Component({
@@ -7,10 +8,10 @@ import { Component } from '@angular/core';
 })
 
 export class ListaComponent {
-  page: string;
+  page: Page;
 
   constructor() {
-    this.page = '';
+    this.page = Page.Lista;
   }
 
 }

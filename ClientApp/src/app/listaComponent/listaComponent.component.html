@@ -1,53 +1,17 @@
 
-  <div style="margin:20px 0;">
-    <button class="addButton" (click)="openItemDialog()"><i class="fas fa-plus"></i></button>
-    <button *ngIf="page==''" class="importButton" (click)="displayImportDialog=true">Importa lista base</button>
-  </div>
+<div style="margin:20px 0;">
+  <button class="addButton" (click)="openAddItemDialog()"><i class="fas fa-plus"></i></button>
+  <button *ngIf="deleteItemsId.length!=0" class="addButton" (click)="openDeleteSelectedItems()"><i class="far fa-trash-alt"></i></button>
+  <button *ngIf="deleteItemsId.length!=0" class="addButton" (click)="openTransferDialog()"><i class="fas fa-exchange-alt"></i></button>
+  <button *ngIf="page==Page.Lista" class="importButton" (click)="displayImportDialog=true">Importa lista base</button>
+</div>
 
-  <baseTable [page]="page"
-             (change)="openChangeItemDialog($event)"
-             (delete)="openDeleteDialog($event)"
-             (select)="selectItemCallback($event)"
-             ></baseTable>
+<baseTable [page]="page"
+           (change)="openChangeItemDialog($event)"
+           (delete)="openDeleteDialog($event)"
+           (select)="selectItemCallback($event)"></baseTable>
 
-  <addOrChangeDialog [action]="Action.Create"></addOrChangeDialog>
-  <addOrChangeDialog [action]="Action.Edit"></addOrChangeDialog>
+<addOrChangeDialog [(id)]="changeItemId" [page]="page" (onClose)="onCloseAddDialog()" [(visible)]="displayItemDialog"></addOrChangeDialog>
 
-<p-dialog [(visible)]="displayDeleteDialog" [showHeader]="false" styleClass="delete">
-  <div>
-    <div style="display:inline-block;width:80%">
-      <span *ngIf="currentItem.id==0||currentItem.id==null" class="dialogTitle">Nuovo oggetto</span>
-      <span *ngIf="currentItem.id!=0&&currentItem.id!=null" class="dialogTitle">Modifica oggetto</span>
-    </div>
-    <button class="addButton" style="float:right;display:inline-block" (click)="displayDeleteDialog=false;sendRequestError=false;"><i class="fas fa-times"></i></button>
-  </div>
-  <div style="width:90%;margin:40px auto;font-size:18px;">
-    Vuoi davvero eliminare l'oggetto {{this.currentItem.nome}}?
-  </div>
-  <span *ngIf="sendRequestError">C'è stato un problema</span>
-  <div style="margin:20px auto 0 auto; width:40px">
-    <button class="addButton" (click)="DeleteItem()">
-      <i class="far fa-trash-alt"></i>
-    </button>
-  </div>
-
-</p-dialog>
-
-<p-dialog [(visible)]="displayImportDialog" [showHeader]="false" styleClass="delete">
-  <div>
-    <div style="display:inline-block;width:80%">
-      <span class="dialogTitle">Importa lista base</span>
-    </div>
-    <button class="addButton" style="float:right;display:inline-block" (click)="displayImportDialog=false;sendRequestError=false;"><i class="fas fa-times"></i></button>
-  </div>
-  <div style="width:90%;margin:30px auto;font-size:18px;">
-    Vuoi davvero importare la lista base? Gli oggetti con lo stesso nome non verranno importati.
-  </div>
-  <span *ngIf="sendRequestError">C'è stato un problema</span>
-  <div style="margin:20px auto 0 auto; width:40px">
-    <button class="addButton" (click)="importBasicList()">
-      <i class="fas fa-file-import"></i>
-    </button>
-  </div>
-
-</p-dialog>
+<deleteDialog (onClose)="displayDeleteDialog=false" [page]="page" [(visible)]="displayDeleteDialog" [(deleteIds)]="deleteItemsId"></deleteDialog>
+<importDialog (onClose)="displayImportDialog=false" [(visible)]="displayImportDialog"></importDialog>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using PersonalLibrary.ListaSpesa;
 using System.Text.Json;
 using System;
+using System.Linq;
 
 namespace ListSpesa.Controllers
 {
@@ -136,16 +137,18 @@ namespace ListSpesa.Controllers
     public class DeleteAutocompleteItemController : ControllerBase
     {
         [HttpPost]
-        public bool DeleteAutocompleteItem([FromBody] JsonElement data)
+        public List<bool> DeleteAutocompleteItem([FromBody] long[] data)
         {
             try
             {
-                Item item = JsonSerializer.Deserialize<Item>(data.GetRawText());
-
                 if (HttpContext.Session.GetInt32("logged") == 1)
                 {
-                    bool res = AutocompleteEditor.DeleteAutocomplete(item);
-                    if (res)
+
+                    List<bool> res = new List<bool>();
+                    foreach (long num in data) res.Add(AutocompleteEditor.DeleteAutocomplete(num));
+
+
+                    if (res.All(r => r == true))
                     {
                         HttpContext.Response.StatusCode = 200;
                         return res;
@@ -159,14 +162,14 @@ namespace ListSpesa.Controllers
                 else
                 {
                     HttpContext.Response.StatusCode = 201;
-                    return false;
+                    return new List<bool>();
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 HttpContext.Response.StatusCode = 201;
-                return false;
+                return new List<bool>();
             }
         }
     }

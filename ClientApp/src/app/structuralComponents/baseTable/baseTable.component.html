@@ -1,7 +1,7 @@
 <p-table [value]="items" [scrollable]="true" *ngIf="!waiting">
   <ng-template pTemplate="header">
     <tr>
-      <th></th>
+      <th style="width:85px"></th>
       <!--ITEM NOME-->
       <th class="nomeCol">Nome</th>
 
@@ -18,8 +18,8 @@
       <th class="offertaCol" *ngIf="page==Page.Lista">
         <span style="line-height:30px">Zona</span>
         <button class="orderButton" (click)="changeOrder()">
-          <span *ngIf="this.sortCase==2">Aldi</span>
-          <span *ngIf="this.sortCase==1">Lidl</span>
+          <span *ngIf="this.sortCase==SortCase.Aldi">Aldi</span>
+          <span *ngIf="this.sortCase==SortCase.Lidl">Lidl</span>
         </button>
       </th>
 
@@ -32,14 +32,17 @@
       <!--MODIFICA BUTTON-->
       <th class="offertaCol" style="width:85px">Modifica</th>
 
-      <!--ELIMINA BUTTON-->
-      <th class="offertaCol" style="width:85px">Elimina</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item>
     <tr [ngStyle]="{'opacity':item.ordine==0?0.25:1}">
 
-      <td></td>
+      <td style="width:85px">
+        <div (click)="selectItem(item.id)" class="checkBoxCustom" [ngClass]="{'checkBoxCustomSelected':itemSelected.includes(item.id)}">
+          <i class="fas fa-check customIcon" *ngIf="itemSelected.includes(item.id)"></i>
+        </div>
+      </td>
+
       <!--ITEM NOME-->
       <td class="nomeCol">
         {{item.nome}}
@@ -51,12 +54,12 @@
       </td>
 
       <!--ITEM OFFERTA LIDL-->
-      <td style="text-align: center" *ngIf="sortCase==2&&page==Page.Lista" class="offertaCol">
+      <td style="text-align: center" *ngIf="sortCase==SortCase.Lidl&&page==Page.Lista" class="offertaCol">
         <i class="fas fa-circle" [ngStyle]="{'color':item.offertaLidl?'green':'white'}" style="font-size:20px;"></i>
       </td>
 
       <!--ITEM OFFERTA ALDI-->
-      <td style="text-align: center" *ngIf="sortCase==1&&page==Page.Lista" class="offertaCol">
+      <td style="text-align: center" *ngIf="sortCase==SortCase.Aldi&&page==Page.Lista" class="offertaCol">
         <i class="fas fa-circle" [ngStyle]="{'color':item.offertaAldi?'green':'white'}" style="font-size:20px;"></i>
       </td>
 
@@ -83,12 +86,6 @@
       <td style="text-align:center;width:85px" class="offertaCol">
         <button style="border:none;background-color:inherit" (click)="changeItem(item.id)">
           <i class="fas fa-edit"></i>
-        </button>
-      </td>
-
-      <td style="text-align:center;width:85px" class="offertaCol">
-        <button style="border:none;background-color:inherit" (click)="deleteItem(item.id)">
-          <i class="far fa-trash-alt"></i>
         </button>
       </td>
 

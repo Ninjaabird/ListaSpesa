@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Item, Utils } from '../utils/utils';
+import { Item, Page, Utils } from '../utils/utils';
 
 
 @Component({
@@ -9,9 +9,9 @@ import { Item, Utils } from '../utils/utils';
 })
 
 export class ListaAutocompleteComponent {
-  page: string;
+  page: Page;
 
   constructor() {
-    this.page = 'Autocomplete';
+    this.page = Page.ListaAutocomplete;
   }
 }

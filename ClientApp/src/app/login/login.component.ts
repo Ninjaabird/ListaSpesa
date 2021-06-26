@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginData, Utils } from '../utils/utils';
 import { LogCheck } from '../utils/services';
+import { Storage } from '../utils/Storage';
 
 
 @Component({
@@ -18,49 +19,35 @@ export class LoginComponent {
 
   loginData: LoginData = new LoginData();
 
-  error: string = "";
-
   errorBool: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router, private logCheck: LogCheck) {
+  waiting: boolean = false;
+
+  constructor(private http: HttpClient, private router: Router, private logCheck: LogCheck, private storage: Storage) {
   }
 
   async login() {
 
     if (this.checkForm()) {
+      this.waiting = true;
 
       let response;
 
       try {
         response = await this.http.post("Login", JSON.stringify(this.loginData), Utils.option).toPromise();
         this.errorBool = false;
-      }
-      catch (e) {
-        console.log(e);
-      }
-      finally {
+
+        await this.storage.GetItems(this.http);
 
         if (response.status == 200) {
           this.logCheck.logged = true;
           this.router.navigate(['/lista']);
         }
-        else if (response.status == 201) {
-          this.errorBool = true;
-          this.error = "Utente già connesso";
-        }
-        else if (response.status == 202) {
-          this.errorBool = true;
-          this.error = "Password o nome errato";
-        }
-        else if (response.status == 203) {
-          this.errorBool = true;
-          this.error = "Errore interno al server";
-        }
-        else {
-          console.log(response);
-        }
       }
-
+      catch (e) {
+        console.log(e);
+      }
+      this.waiting = false;
     }
   }
 

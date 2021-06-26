@@ -16,6 +16,7 @@ import { LogCheck } from './utils/services';
 import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BaseTableComponent } from './structuralComponents/baseTable/baseTable.component';
+import { ToastModule } from 'primeng/toast';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -27,6 +28,11 @@ import { ListaBasicComponent } from './listaBase/listaBase.component';
 
 
 import { ListaComponentComponent } from './listaComponent/listaComponent.component';
+import { Storage } from './utils/Storage';
+import { AddOrChangeDialogComponent } from './structuralComponents/addOrChangeDialog/addOrChangeDialog.component';
+import { MessageService } from 'primeng/api';
+import { DeleteDialogComponent } from './structuralComponents/deleteDialog/deleteDialog.component';
+import { ImportDialogComponent } from './structuralComponents/importDialog/importDialog.component';
 
 
 
@@ -41,6 +47,9 @@ import { ListaComponentComponent } from './listaComponent/listaComponent.compone
     ListaBasicComponent,
     ListaComponentComponent,
     BaseTableComponent,
+    AddOrChangeDialogComponent,
+    DeleteDialogComponent,
+    ImportDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -57,6 +66,7 @@ import { ListaComponentComponent } from './listaComponent/listaComponent.compone
     BrowserAnimationsModule,
     DialogModule,
     ProgressSpinnerModule,
+    ToastModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
@@ -65,7 +75,7 @@ import { ListaComponentComponent } from './listaComponent/listaComponent.compone
       { path: 'listaBasic', component: ListaBasicComponent },
     ])
   ],
-  providers: [LogCheck],
+  providers: [LogCheck, Storage, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

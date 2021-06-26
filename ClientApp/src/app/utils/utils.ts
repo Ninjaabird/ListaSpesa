@@ -10,27 +10,28 @@ export class Utils {
     observe: 'response'
   }
 
-  public static SortItems(items: Item[], caso: number) {
+  static requestType: string[] = ['', "Basic", "Autocomplete"];
+
+  public static SortItems(items: Item[], caso: SortCase) {
 
     items = items.sort(function (a, b) {
       return Utils.Sorter(a, b,caso);
     });
     items.forEach((item: Item) => {
-      caso == 1 ? item.ordine = item.ordineLidl : item.ordine = item.ordineAldi;
+      caso == SortCase.Lidl ? item.ordine = item.ordineLidl : item.ordine = item.ordineAldi;
     });
     return items;
   }
 
-  public static Sorter(a: Item, b: Item, caso: number) {
+  public static Sorter(a: Item, b: Item, caso: SortCase) {
     let i;
     let j;
-    //aldi
-    if (caso == 2) {
+
+    if (caso == SortCase.Aldi) {
       i = a.ordineAldi;
       j = b.ordineAldi;
     }
-    //lidl
-    else if (caso == 1) {
+    else if (caso == SortCase.Lidl) {
       i = a.ordineLidl;
       j = b.ordineLidl;
     }
@@ -42,6 +43,16 @@ export class Utils {
     else {
       return i > j ? 1 : i < j ? -1 : 0
     }
+  }
+
+  public static CorrectItem(item: Item) {
+    if (item.nome == undefined || item.nome == null) item.nome = "";
+    if (item.offertaAldi == undefined || item.offertaAldi == null) item.offertaAldi = false;
+    if (item.offertaLidl == undefined || item.offertaLidl == null) item.offertaLidl = false;
+    if (item.ordineAldi == undefined || item.ordineAldi == null) item.ordineAldi = 0;
+    if (item.ordineLidl == undefined || item.ordineLidl == null) item.ordineLidl = 0;
+    if (item.prezzo == undefined || item.prezzo == null) item.prezzo = 0;
+    if (item.quantita == undefined || item.quantita == null) item.quantita = 0;
   }
  
 }
@@ -57,6 +68,24 @@ export class Item {
   public ordine: number;
   public ordineLidl: number;
   public ordineAldi: number;
+
+  constructor() {
+
+  }
+
+  public Clone(): Item {
+    let item = new Item();
+    item.id = this.id;
+    item.nome = this.nome;
+    item.quantita = this.quantita;
+    item.prezzo = this.prezzo;
+    item.offertaLidl = this.offertaLidl;
+    item.offertaAldi = this.offertaAldi;
+    item.ordine = this.ordine;
+    item.ordineLidl = this.ordineLidl;
+    item.ordineAldi = this.ordineAldi;
+    return item;
+  }
 }
 
 
@@ -69,4 +98,9 @@ export enum Page {
   Lista,
   ListaBase,
   ListaAutocomplete
+}
+
+export enum SortCase {
+  Lidl,
+  Aldi
 }

@@ -1,59 +1,60 @@
-<p-dialog [(visible)]="displayItemDialog" styleClass="AdaptivePDialog" [showHeader]="false">
+<p-dialog [(visible)]="visible" styleClass="AdaptivePDialog" [showHeader]="false">
   <div>
     <div style="display:inline-block;width:80%">
-      <span *ngIf="new" class="dialogTitle">Nuovo oggetto</span>
-      <span *ngIf="new==false" class="dialogTitle">Modifica oggetto</span>
+      <span *ngIf="id==0 || id==undefined" class="dialogTitle">Nuovo oggetto</span>
+      <span *ngIf="id!=0 && id!=undefined" class="dialogTitle">Modifica oggetto</span>
     </div>
-    <button class="addButton" style="float:right;display:inline-block" (click)="displayItemDialog=false;sendRequestError=false;"><i class="fas fa-times"></i></button>
+    <button class="addButton" style="float:right;display:inline-block" (click)="closeDialog()"><i class="fas fa-times"></i></button>
   </div>
 
   <div>
 
     <div class="ui-float-label">
-      <p-autoComplete [(ngModel)]="autocompleteItem" field="nome" [suggestions]="suggestedItems" (keyup)="searchForItems()" (onSelect)="selectTheItem($event)"></p-autoComplete>
+      <p-autoComplete [(ngModel)]="item.nome" field="nome" [suggestions]="suggestedItems" (keyup)="searchForItems()" (onSelect)="selectTheItem($event)"></p-autoComplete>
       <label for="nome">Nome</label>
     </div>
 
     <div class="ui-float-label">
-      <input [(ngModel)]="currentItem.quantita" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
+      <input [(ngModel)]="item.quantita" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
       <label for="nome">Quantità</label>
     </div>
 
     <div class="ui-float-label">
-      <input [(ngModel)]="currentItem.prezzo" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
+      <input [(ngModel)]="item.prezzo" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
       <label for="nome">Prezzo</label>
     </div>
 
     <div class="ui-float-label">
-      <input [(ngModel)]="currentItem.ordineLidl" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
+      <input [(ngModel)]="item.ordineLidl" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
       <label for="nome">Ordine Lidl</label>
     </div>
 
     <div class="ui-float-label">
-      <input [(ngModel)]="currentItem.ordineAldi" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
+      <input [(ngModel)]="item.ordineAldi" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
       <label for="nome">Ordine Aldi</label>
     </div>
     <div style="margin:10px auto; width:100%">
-      <button class="offertaButton" style="margin-right:5%;" [ngClass]="{'offertaButtonTrue':currentItem.offertaAldi,'offertaButtonFalse':currentItem.offertaAldi==false}" (click)="currentItem.offertaAldi?currentItem.offertaAldi=false:currentItem.offertaAldi=true;">
+      <button class="offertaButton" [ngClass]="{'offertaButtonTrue':item.offertaAldi,'offertaButtonFalse':item.offertaAldi==false}" (click)="item.offertaAldi?item.offertaAldi=false:item.offertaAldi=true;">
         Offerta Aldi
       </button>
-      <button class="offertaButton" style="margin-left:5%;" [ngClass]="{'offertaButtonTrue':currentItem.offertaLidl,'offertaButtonFalse':currentItem.offertaLidl==false}" (click)="currentItem.offertaLidl?currentItem.offertaLidl=false:currentItem.offertaLidl=true;">
+      <button class="offertaButton" [ngClass]="{'offertaButtonTrue':item.offertaLidl,'offertaButtonFalse':item.offertaLidl==false}" (click)="item.offertaLidl?item.offertaLidl=false:item.offertaLidl=true;">
         Offerta Lidl
       </button>
     </div>
     <span *ngIf="sendRequestError">C'è stato un problema</span>
 
-    <div style="margin:20px auto; width:40px" *ngIf="new">
+    <div style="margin:20px auto; width:40px" *ngIf="id==0 || id==undefined">
       <button class="addButton" (click)="addItem()">
         <i class="fas fa-save"></i>
       </button>
     </div>
 
-    <div style="margin:20px auto; width:40px" *ngIf="new==false">
-      <button class="addButton" (click)="EditItem()">
+    <div style="margin:20px auto; width:40px" *ngIf="id!=0 && id!=undefined">
+      <button class="addButton" (click)="editItem()">
         <i class="fas fa-edit"></i>
       </button>
     </div>
   </div>
 
 </p-dialog>
+<p-toast position="top-right"></p-toast>

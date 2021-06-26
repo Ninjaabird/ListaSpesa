@@ -1,0 +1,18 @@
+<p-dialog [(visible)]="visible" [showHeader]="false" styleClass="delete">
+  <div>
+    <div style="display:inline-block;width:80%">
+      <span style="font-size:25px;">Importa lista base</span>
+    </div>
+    <button class="addButton" style="float:right;display:inline-block" (click)="closeDialog()"><i class="fas fa-times"></i></button>
+  </div>
+  <div style="width:90%;margin:30px auto;font-size:18px;">
+    Vuoi davvero importare la lista base? Gli oggetti con lo stesso nome non verranno importati.
+  </div>
+  <span *ngIf="sendRequestError">C'è stato un problema</span>
+  <div style="margin:20px auto 0 auto; width:40px">
+    <button class="addButton" (click)="importBaseList()">
+      <i class="fas fa-file-import"></i>
+    </button>
+  </div>
+
+</p-dialog>

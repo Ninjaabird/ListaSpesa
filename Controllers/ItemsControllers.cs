@@ -6,6 +6,7 @@ using PersonalLibrary;
 using System.Text.Json;
 using MySql.Data.MySqlClient;
 using System;
+using System.Linq;
 
 namespace ListSpesa.Controllers
 {
@@ -121,18 +122,18 @@ namespace ListSpesa.Controllers
     public class DeleteItemController : ControllerBase
     {
         [HttpPost]
-        public bool DeleteItem([FromBody] JsonElement data)
+        public List<bool> DeleteItem([FromBody] long[] data)
         {
             try
             {
-                Item item = JsonSerializer.Deserialize<Item>(data.GetRawText());
-
                 if (HttpContext.Session.GetInt32("logged") == 1)
                 {
 
-                    bool res = ItemEditor.DeleteItem(item);
+                    List<bool> res = new List<bool>();
+                    foreach(long num in data) res.Add(ItemEditor.DeleteItem(num));
 
-                    if (res)
+
+                    if (res.All(r=>r==true))
                     {
                         HttpContext.Response.StatusCode = 200;
                         return res;
@@ -146,14 +147,14 @@ namespace ListSpesa.Controllers
                 else
                 {
                     HttpContext.Response.StatusCode = 201;
-                    return false;
+                    return new List<bool>();
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 HttpContext.Response.StatusCode = 201;
-                return false;
+                return new List<bool>();
             }
         }
     }
