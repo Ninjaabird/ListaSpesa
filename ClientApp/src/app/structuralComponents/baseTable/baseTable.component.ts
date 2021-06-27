@@ -16,6 +16,7 @@ export class BaseTableComponent implements OnInit {
   @Output() change = new EventEmitter<number>();
   @Output() delete = new EventEmitter<number>();
   @Output() select = new EventEmitter<number[]>();
+  @Output() sortCaseOutput = new EventEmitter<SortCase>();
 
   itemSelected: number[] = [];
   sortCase: SortCase = SortCase.Lidl;
@@ -34,6 +35,7 @@ export class BaseTableComponent implements OnInit {
   changeOrder() {
     this.sortCase == SortCase.Aldi ? this.sortCase = SortCase.Lidl : this.sortCase = SortCase.Aldi;
     Utils.SortItems(this.items, this.sortCase);
+    this.sortCaseOutput.emit(this.sortCase);
   }
 
   selectItem(id: number) {

@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Item, Utils } from "./utils";
 
 
@@ -84,5 +84,19 @@ export class Request {
     catch (e) {
       console.log(e);
     }
+  }
+
+  public static async GetAutocompleteItems(http: HttpClient, nome: string): Promise<Item[]> {
+    let response;
+    try {
+      response = await http.get("GetAutocomplete?nome=" + nome, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        responseType: 'text',
+        observe: 'response'
+      }).toPromise();
+    } catch (e) { console.log(e); }
+    return JSON.parse(response.body);
   }
 }

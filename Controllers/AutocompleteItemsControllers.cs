@@ -10,13 +10,15 @@ namespace ListSpesa.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class GetAutocompleteItemsController : ControllerBase
+    public class GetAutocompleteController : ControllerBase
     {
-        [HttpPost]
-        public List<Item> GetAutocompleteItems([FromBody] string input)
+        [HttpGet]
+        public List<Item> GetAutocomplete()
         {
             if (HttpContext.Session.GetInt32("logged") == 1)
             {
+                string input = HttpContext.Request.Query["nome"];
+                Console.WriteLine(input);
                 return AutocompleteEditor.GetAutocomplete(input);
             }
             else

@@ -193,6 +193,10 @@ namespace ListSpesa.Controllers
                     command.Dispose();
                     return false;
                 }
+                finally
+                {
+                    conn.Close();
+                }
                 if (result > 0)
                 {
                     return true;

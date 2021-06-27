@@ -1,0 +1,9 @@
+<input [(ngModel)]="text" type="text" class="customAutocomplete" (keyup)="onKeyUp()" placeholder="Nome" />
+<div class="itemsContainer">
+  <ng-template ngFor let-item [ngForOf]="items">
+
+    <div class="itemContainer" (click)="itemSelected(item)">
+      {{item.nome}}
+    </div>
+  </ng-template>
+</div>

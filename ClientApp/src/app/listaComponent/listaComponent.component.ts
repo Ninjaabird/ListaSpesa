@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Item, Page, Utils } from "../utils/utils";
+import { Item, Page, SortCase, Utils } from "../utils/utils";
 import { HttpClient } from "@angular/common/http";
 import { Request } from "../utils/request";
 import { Storage } from "../utils/Storage";
@@ -28,29 +28,36 @@ export class ListaComponentComponent {
 
   changeItemId: number;
 
-  constructor(private http: HttpClient) {
+  sortCase: SortCase = SortCase.Lidl;
+
+  constructor(private http: HttpClient, private storage: Storage) {
 
   }
-  
+
   openAddItemDialog() {
     this.changeItemId = 0;
     this.displayItemDialog = !this.displayItemDialog;
+    this.storage.SortAll(this.sortCase);
   }
 
   openImportDialog() {
     this.displayImportDialog = true;
+    this.storage.SortAll(this.sortCase);
   }
 
   openDeleteSelectedItems() {
     this.displayDeleteDialog = true;
+    this.storage.SortAll(this.sortCase);
   }
 
   openTransferDialog() {
     this.displayTransferDialog = true;
+    this.storage.SortAll(this.sortCase);
   }
 
   onCloseAddDialog() {
     this.displayItemDialog = false;
+    this.storage.SortAll(this.sortCase);
   }
 
   //callback relativi alla baseTable

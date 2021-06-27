@@ -34,7 +34,6 @@ export class DeleteDialogComponent implements OnChanges {
       this.deleteIds = changes["deleteIds"].currentValue;
     }
     this.items = this.storage.items[Utils.requestType[this.page].toLowerCase()].filter((it: Item) => this.deleteIds.includes(it.id));
-    console.log(this.items);
   }
 
   async deleteItems() {

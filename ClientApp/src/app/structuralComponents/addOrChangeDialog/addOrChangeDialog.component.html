@@ -8,52 +8,50 @@
   </div>
 
   <div>
+      <div class="ui-float-label">
+        <app-autocomplete [text]="item.nome" [(items)]="searchedItems" (onItemSelect)="selectTheItem($event)" (buttonPressedCallBack)="searchForItems($event)"></app-autocomplete>
+      </div>
 
-    <div class="ui-float-label">
-      <p-autoComplete [(ngModel)]="item.nome" field="nome" [suggestions]="suggestedItems" (keyup)="searchForItems()" (onSelect)="selectTheItem($event)"></p-autoComplete>
-      <label for="nome">Nome</label>
-    </div>
+      <div class="ui-float-label">
+        <input [(ngModel)]="item.quantita" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
+        <label for="nome">Quantità</label>
+      </div>
 
-    <div class="ui-float-label">
-      <input [(ngModel)]="item.quantita" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
-      <label for="nome">Quantità</label>
-    </div>
+      <div class="ui-float-label">
+        <input [(ngModel)]="item.prezzo" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
+        <label for="nome">Prezzo</label>
+      </div>
 
-    <div class="ui-float-label">
-      <input [(ngModel)]="item.prezzo" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
-      <label for="nome">Prezzo</label>
-    </div>
+      <div class="ui-float-label">
+        <input [(ngModel)]="item.ordineLidl" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
+        <label for="nome">Ordine Lidl</label>
+      </div>
 
-    <div class="ui-float-label">
-      <input [(ngModel)]="item.ordineLidl" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
-      <label for="nome">Ordine Lidl</label>
-    </div>
+      <div class="ui-float-label">
+        <input [(ngModel)]="item.ordineAldi" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
+        <label for="nome">Ordine Aldi</label>
+      </div>
+      <div style="margin:10px auto; width:100%">
+        <button class="offertaButton" [ngClass]="{'offertaButtonTrue':item.offertaAldi,'offertaButtonFalse':item.offertaAldi==false}" (click)="item.offertaAldi?item.offertaAldi=false:item.offertaAldi=true;">
+          Offerta Aldi
+        </button>
+        <button class="offertaButton" [ngClass]="{'offertaButtonTrue':item.offertaLidl,'offertaButtonFalse':item.offertaLidl==false}" (click)="item.offertaLidl?item.offertaLidl=false:item.offertaLidl=true;">
+          Offerta Lidl
+        </button>
+      </div>
+      <span *ngIf="sendRequestError">C'è stato un problema</span>
 
-    <div class="ui-float-label">
-      <input [(ngModel)]="item.ordineAldi" type="number" size="30" pattern="[a-zA-Z ]*" [ngStyle]="{'width':'100%'}" pInputText>
-      <label for="nome">Ordine Aldi</label>
-    </div>
-    <div style="margin:10px auto; width:100%">
-      <button class="offertaButton" [ngClass]="{'offertaButtonTrue':item.offertaAldi,'offertaButtonFalse':item.offertaAldi==false}" (click)="item.offertaAldi?item.offertaAldi=false:item.offertaAldi=true;">
-        Offerta Aldi
-      </button>
-      <button class="offertaButton" [ngClass]="{'offertaButtonTrue':item.offertaLidl,'offertaButtonFalse':item.offertaLidl==false}" (click)="item.offertaLidl?item.offertaLidl=false:item.offertaLidl=true;">
-        Offerta Lidl
-      </button>
-    </div>
-    <span *ngIf="sendRequestError">C'è stato un problema</span>
+      <div style="margin:20px auto; width:40px" *ngIf="id==0 || id==undefined">
+        <button class="addButton" (click)="addItem()">
+          <i class="fas fa-save"></i>
+        </button>
+      </div>
 
-    <div style="margin:20px auto; width:40px" *ngIf="id==0 || id==undefined">
-      <button class="addButton" (click)="addItem()">
-        <i class="fas fa-save"></i>
-      </button>
-    </div>
-
-    <div style="margin:20px auto; width:40px" *ngIf="id!=0 && id!=undefined">
-      <button class="addButton" (click)="editItem()">
-        <i class="fas fa-edit"></i>
-      </button>
-    </div>
+      <div style="margin:20px auto; width:40px" *ngIf="id!=0 && id!=undefined">
+        <button class="addButton" (click)="editItem()">
+          <i class="fas fa-edit"></i>
+        </button>
+      </div>
   </div>
 
 </p-dialog>

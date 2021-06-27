@@ -21,12 +21,20 @@ export class Storage {
     Utils.SortItems(this.items['autocomplete'], SortCase.Lidl);
   }
 
-  public async ImportBaseList(http: HttpClient) {
+  public SortAll(sort: SortCase) {
+    Utils.SortItems(this.items[''], sort);
+    Utils.SortItems(this.items['basic'], sort);
+    Utils.SortItems(this.items['autocomplete'], sort);
+  }
+
+  public async ImportBaseList(http: HttpClient, sortCase: SortCase) {
     let res = await Request.ImportBaseList(http);
     if (res) {
-      let list = this.items['basic'].filter(it => !this.items[''].includes(this.items[''].find(val=>val.nome==it.nome)));
-      for (let i in list) this.items[''].push(list[i]);
-      
+      //non funziona ancora
+      let items = await Request.GetItems('', http);
+      this.items[''].splice(0, this.items[''].length);
+      Utils.AddRange(this.items[''], items);
+      Utils.SortItems(this.items[''], sortCase);
     }
     return res;
   }

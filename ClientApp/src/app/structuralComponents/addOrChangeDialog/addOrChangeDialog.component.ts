@@ -1,8 +1,9 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from "@angular/core";
 import { Storage } from "../../utils/Storage";
 import { Item, Page, Utils } from "../../utils/utils";
 import { MessageService } from 'primeng/api';
+import { Request } from "../../utils/request";
 
 @Component({
   selector: 'addOrChangeDialog',
@@ -19,6 +20,8 @@ export class AddOrChangeDialogComponent implements OnChanges {
   @Output() onClose = new EventEmitter<void>();
 
   item: Item;
+
+  searchedItems: Item[];
 
   constructor(private storage: Storage, private http: HttpClient, private messageService: MessageService) { }
 
@@ -58,8 +61,13 @@ export class AddOrChangeDialogComponent implements OnChanges {
   }
 
   //funzione per cercare gli item per l'autocomplete
-  async searchForItems() {
+  searchForItems(event: any) {
+    this.item.nome = event;
+    Request.GetAutocompleteItems(this.http, event).then((val) => this.searchedItems = val);
+  }
 
+  selectTheItem(event: any) {
+    this.item = event;
   }
 
   //funzione per chiudere il dialog

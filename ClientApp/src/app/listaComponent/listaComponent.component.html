@@ -9,9 +9,10 @@
 <baseTable [page]="page"
            (change)="openChangeItemDialog($event)"
            (delete)="openDeleteDialog($event)"
-           (select)="selectItemCallback($event)"></baseTable>
+           (select)="selectItemCallback($event)"
+           (sortCaseOutput)="sortCase=$event"></baseTable>
 
 <addOrChangeDialog [(id)]="changeItemId" [page]="page" (onClose)="onCloseAddDialog()" [(visible)]="displayItemDialog"></addOrChangeDialog>
 
 <deleteDialog (onClose)="displayDeleteDialog=false" [page]="page" [(visible)]="displayDeleteDialog" [(deleteIds)]="deleteItemsId"></deleteDialog>
-<importDialog (onClose)="displayImportDialog=false" [(visible)]="displayImportDialog"></importDialog>
+<importDialog (onClose)="displayImportDialog=false" [(visible)]="displayImportDialog" [(sortCase)]="sortCase"></importDialog>

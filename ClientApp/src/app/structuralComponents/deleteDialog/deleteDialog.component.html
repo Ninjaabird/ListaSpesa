@@ -1,4 +1,4 @@
-<p-dialog [(visible)]="visible" [showHeader]="false" styleClass="delete" [ngStyle]="{'height':'60vh'}">
+<p-dialog [(visible)]="visible" [showHeader]="false" [modal]="true" styleClass="delete" [ngStyle]="{'height':'60vh'}">
   <div>
     <div style="display:inline-block;width:80%">
       <span *ngIf="deleteIds.length==1" class="dialogTitle">Elimina oggetto</span>

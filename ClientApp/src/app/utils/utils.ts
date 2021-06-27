@@ -54,7 +54,11 @@ export class Utils {
     if (item.prezzo == undefined || item.prezzo == null) item.prezzo = 0;
     if (item.quantita == undefined || item.quantita == null) item.quantita = 0;
   }
- 
+
+  public static AddRange(returnList: Item[], addList: Item[]) {
+    for (let i in addList) returnList.push(addList[i]);
+    return returnList;
+  }
 }
 
 

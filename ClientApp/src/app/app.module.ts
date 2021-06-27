@@ -33,6 +33,7 @@ import { AddOrChangeDialogComponent } from './structuralComponents/addOrChangeDi
 import { MessageService } from 'primeng/api';
 import { DeleteDialogComponent } from './structuralComponents/deleteDialog/deleteDialog.component';
 import { ImportDialogComponent } from './structuralComponents/importDialog/importDialog.component';
+import { AppAutocompleteComponent } from './structuralComponents/app-autocomplete/app-autocomplete.component';
 
 
 
@@ -49,7 +50,8 @@ import { ImportDialogComponent } from './structuralComponents/importDialog/impor
     BaseTableComponent,
     AddOrChangeDialogComponent,
     DeleteDialogComponent,
-    ImportDialogComponent
+    ImportDialogComponent,
+    AppAutocompleteComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
