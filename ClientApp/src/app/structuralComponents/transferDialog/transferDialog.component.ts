@@ -8,9 +8,9 @@ import { Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-transfer-dialog',
-  templateUrl: './transfer-dialog.component.html',
-  styleUrls: ['./transfer-dialog.component.css']
+  selector: 'transferDialog',
+  templateUrl: './transferDialog.component.html',
+  styleUrls: ['./transferDialog.component.css']
 })
 export class TransferDialogComponent implements OnChanges {
 

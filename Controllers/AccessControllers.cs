@@ -23,7 +23,7 @@ namespace ListSpesa.Controllers
             }
             else
             {
-                MySqlConnection conn = MySqlDataGetter.createConnection("ListaSpesa");
+                MySqlConnection conn = MySqlDataGetter.createConnection("listaspesa");
 
                 try
                 {

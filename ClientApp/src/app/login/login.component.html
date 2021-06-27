@@ -16,12 +16,8 @@
   </div>
   <div style="color:red;text-align:center" *ngIf="passErr">Password non valida</div>
 
-  <div style="margin:30px auto;text-align:center; color:darkred">
-    {{error}}
-  </div>
-
   <div style="width:20%;margin:10px auto;">
-    <p-button label="Login" (click)="login()" styleClass="logButton"></p-button>
+    <button (click)="login()" class="logButton">Login</button>
   </div>
 
 </div>
